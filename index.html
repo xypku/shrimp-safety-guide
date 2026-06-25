@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安全养虾指南 | AI助手部署全攻略</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s linear infinite;
+            opacity: 0.2;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-50px, -50px) rotate(360deg);
+            }
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: #f8fafc;
+            border-radius: 15px;
+            border-left: 5px solid #3498db;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.1);
+        }
+
+        .section-title {
+            font-size: 22px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: #3498db;
+            font-size: 24px;
+        }
+
+        .software-list {
+            margin-top: 20px;
+        }
+
+        .software-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            border: 2px solid #e3f2fd;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .software-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .software-card:hover {
+            border-color: #3498db;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(52, 152, 219, 0.15);
+        }
+
+        .software-name {
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .software-name.zhizhi {
+            color: #e74c3c;
+        }
+
+        .software-name.tencent {
+            color: #0084ff;
+        }
+
+        .software-icon {
+            font-size: 24px;
+        }
+
+        .link {
+            display: inline-block;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+            background: linear-gradient(135deg, #2980b9, #1f618d);
+        }
+
+        .provider-list {
+            margin-top: 20px;
+        }
+
+        .provider-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+            border-left: 5px solid;
+            margin-bottom: 25px;
+        }
+
+        .provider-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .provider-card.siliconflow {
+            border-left-color: #9b59b6;
+        }
+
+        .provider-card.chatanywhere {
+            border-left-color: #e67e22;
+        }
+
+        .provider-card.deepseek {
+            border-left-color: #1abc9c;
+        }
+
+        .provider-name {
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .provider-icon {
+            font-size: 24px;
+        }
+
+        .feature {
+            background: #e3f2fd;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 14px;
+            color: #2c3e50;
+        }
+
+        .feature.highlight {
+            background: linear-gradient(135deg, #ffd6e7, #c2e9fb);
+            border-left: 4px solid #e74c3c;
+        }
+
+        .price-comparison {
+            background: linear-gradient(135deg, #4a69bd, #6a89cc);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .price-comparison a {
+            color: white;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+        .security-section {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .security-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .prompt-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin-top: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .install-box {
+            background: #1e2a3a;
+            color: #a8d8a8;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            margin: 8px 0;
+            border-left: 4px solid #27ae60;
+            line-height: 1.8;
+        }
+
+        .install-box .comment {
+            color: #7f8c8d;
+        }
+
+        .tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 14px;
+            background: #f8fafc;
+            border-top: 1px solid #eaeaea;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 15px;
+                margin: 10px;
+            }
+
+            .content {
+                padding: 25px;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .software-card,
+            .provider-card {
+                padding: 20px;
+            }
+
+            .software-name,
+            .provider-name {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🦐 安全养虾指南</h1>
+            <p class="subtitle">AI助手高效部署全攻略 | 从零开始，轻松搭建</p>
+        </div>
+
+        <div class="content">
+            <!-- 软件选择与下载 -->
+            <div class="section">
+                <div class="section-title">
+                    <span>📦 软件选择与下载地址</span>
+                </div>
+                <p style="color: #666; margin-bottom: 20px;">根据您的需求选择最适合的AI助手版本：</p>
+
+                <div class="software-list">
+                    <div class="software-card">
+                        <div class="software-name zhizhi"><span class="software-icon">🧪</span> AutoClaw（智谱·澳龙）</div>
+                        <p style="color: #666; font-size: 15px; line-height: 1.7; margin-bottom: 15px;">
+                            智谱官方出品的一键安装AI助手（中文名"澳龙"），<strong>下载双击即用，1分钟完成本地部署</strong>。内置 50+ 热门技能，预置 <strong>Pony-Alpha-2</strong> 专有模型并赠送免费额度，可0成本开玩。支持接入飞书、微信、DeepSeek、GLM 等多种模型和渠道。已开放 <strong>GLM-5.2（753B MoE，1M上下文）</strong> 旗舰模型体验，支持 <strong>Hermes 自进化</strong> 能力。可自动生成周报、邮件、PPT、代码，支持微信远程操控电脑办公。
+                        </p>
+
+                        <!-- 亮点标签 -->
+                        <div style="margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 8px;">
+                            <span style="background:#fdedec; color:#e74c3c; padding:4px 12px; border-radius:20px; font-size:13px;">⚡ 1分钟一键部署</span>
+                            <span style="background:#eafaf1; color:#27ae60; padding:4px 12px; border-radius:20px; font-size:13px;">🔧 50+预置Skills</span>
+                            <span style="background:#f5eef8; color:#8e44ad; padding:4px 12px; border-radius:20px; font-size:13px;">🧬 GLM-5.2（1M上下文）</span>
+                            <span style="background:#ebf5fb; color:#2980b9; padding:4px 12px; border-radius:20px; font-size:13px;">💬 飞书/微信集成</span>
+                            <span style="background:#fef9e7; color:#f39c12; padding:4px 12px; border-radius:20px; font-size:13px;">🖥️ 微信远程操控电脑</span>
+                            <span style="background:#d5f5e3; color:#27ae60; padding:4px 12px; border-radius:20px; font-size:13px;">🆕 Pony-Alpha-2 免费额度</span>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #fdedec, #fadbd8); border-left: 4px solid #e74c3c; padding: 10px 15px; border-radius: 8px; margin: 10px 0; font-size: 14px; color: #2c3e50;">
+                            <strong>🎁 AutoClaw 新人限时福利</strong><br>
+                            <span style="font-size: 13px;">
+                                ✦ 新人注册即赠 <strong>2300 积分</strong>，0 成本体验 GLM 模型<br>
+                                ✦ 内置 GLM 5.2 旗舰 + Hermes 自进化能力，开盒即用<br>
+                                ✦ 预置 50+ 技能，接入飞书/微信，1 分钟上手
+                            </span>
+                        </div>
+                        <a href="https://autoclaw.zhipuai.cn" class="link" target="_blank">下载AutoClaw（智谱版）</a>
+                    </div>
+
+                    <div class="software-card">
+                        <div class="software-name tencent"><span class="software-icon">🐧</span> QClaw（腾讯·小龙虾）</div>
+                        <p style="color: #666; font-size: 15px; line-height: 1.7; margin-bottom: 15px;">
+                            腾讯官方出品的本地化AI助手（俗称"小龙虾"），<strong>支持微信远程操控电脑自动办公</strong>。可生成周报、邮件、PPT、公众号文章等，打通企业微信，无需编程基础即可上手使用。已全面开放，无需邀请码，支持 Windows/macOS/iOS/Android 全平台。
+                        </p>
+
+                        <!-- 亮点标签 -->
+                        <div style="margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 8px;">
+                            <span style="background:#d6eaf8; color:#0084ff; padding:4px 12px; border-radius:20px; font-size:13px;">💬 微信远程操控电脑</span>
+                            <span style="background:#ebf5fb; color:#2980b9; padding:4px 12px; border-radius:20px; font-size:13px;">📝 自动生成周报/邮件/PPT/文章</span>
+                            <span style="background:#eafaf1; color:#27ae60; padding:4px 12px; border-radius:20px; font-size:13px;">🆓 已全面开放免费使用</span>
+                            <span style="background:#fef9e7; color:#f39c12; padding:4px 12px; border-radius:20px; font-size:13px;">🏢 企业微信打通</span>
+                            <span style="background:#fdedec; color:#e74c3c; padding:4px 12px; border-radius:20px; font-size:13px;">👨‍💻 零编程基础可用</span>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #d6eaf8, #ebf5fb); border-left: 4px solid #0084ff; padding: 10px 15px; border-radius: 8px; margin: 10px 0; font-size: 14px; color: #2c3e50;">
+                            <strong>🎁 免费额度：每日 800 积分（已升级为积分消耗模式，比原4000万Token更耐用）</strong><br>
+                            <span style="font-size: 13px;">内置 <strong>Kimi K2.6</strong> 和 <strong>GLM 5.1</strong> 两大顶级模型免费使用，积分主要用于技能执行和高级任务</span>
+                        </div>
+                        <a href="https://qclaw.qq.com" class="link" target="_blank">下载QClaw（腾讯版）</a>
+                    </div>
+
+                    <div class="software-card">
+                        <div class="software-name" style="color: #e67e22;"><span class="software-icon">🦞</span> WorkBuddy（腾讯·AI 办公助手）</div>
+                        <p style="color: #666; font-size: 15px; line-height: 1.7; margin-bottom: 15px;">
+                            腾讯云原生自研的 AI 桌面智能体工作台（并非套壳 OpenClaw），深度集成企业办公场景。内置混元、DeepSeek、GLM、Kimi、MiniMax 等主流大模型，无需自备 API Key。支持文档处理、代码编写、智能问答、网页制作等功能，内置 200+ 技能市场（Skills），<strong>让 AI 成为你的全能办公搭档</strong>。
+                        </p>
+
+                        <!-- 亮点标签 -->
+                        <div style="margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 8px;">
+                            <span style="background:#fef3e9; color:#e67e22; padding:4px 12px; border-radius:20px; font-size:13px;">📄 文档/代码/PPT 全能处理</span>
+                            <span style="background:#ebf5fb; color:#2980b9; padding:4px 12px; border-radius:20px; font-size:13px;">🛒 200+ Skills 技能市场</span>
+                            <span style="background:#eafaf1; color:#27ae60; padding:4px 12px; border-radius:20px; font-size:13px;">🤖 内置多模型免 API Key</span>
+                            <span style="background:#f5eef8; color:#8e44ad; padding:4px 12px; border-radius:20px; font-size:13px;">🏢 腾讯云原生自研</span>
+                            <span style="background:#fdedec; color:#c0392b; padding:4px 12px; border-radius:20px; font-size:13px;">💬 微信远程操控电脑</span>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #ffd6e7, #ffe8cc); border-left: 4px solid #e67e22; padding: 12px 15px; border-radius: 8px; margin: 10px 0; font-size: 14px; color: #2c3e50;">
+                            <strong>🎁 免费积分获取（2026年6月最新）：</strong><br>
+                            🆕 新人礼包 <strong style="color:#e74c3c;">~2300 积分</strong>（需手动领取，有效期90天）+ 成长计划任务 <strong>~800 积分</strong><br>
+                            📅 每月基础 <strong>500 积分</strong>（1号自动到账）+ 每日签到 <strong>100 积分</strong><br>
+                            🔗 绑定微信/企微 <strong>+500 永久积分</strong> | 通过邀请链接注册额外送 <strong style="color:#e74c3c;">3000 积分</strong><br>
+                            <span style="font-size: 13px;">首日到手约 4000 积分，轻度办公每月零充值基本够用</span>
+                        </div>
+
+                                                <a href="https://www.codebuddy.cn/work/" class="link" target="_blank">下载WorkBuddy（腾讯版）</a>
+                    </div>
+
+                    <!-- QwenPaw 卡片 -->
+                    <div class="software-card" style="border-color: #d5f5e3;">
+
+                        <!-- 标题区 -->
+                        <div class="software-name" style="color: #27ae60;">
+                            <span class="software-icon">🐾</span> QwenPaw（阿里·通义千问 AI 智能体）
+                            <span class="tag">开源免费</span>
+                            <span class="tag" style="background:#d5f5e3; color:#27ae60;">原名 CoPaw</span>
+                        </div>
+
+                        <!-- 简介 -->
+                        <p style="color: #666; font-size: 15px; line-height: 1.7; margin-bottom: 15px;">
+                            阿里云通义实验室（AgentScope 团队）开源的<strong>个人 AI 桌面智能体工作站</strong>。
+                            原名 <strong>CoPaw</strong>，2026年5月品牌升级为 QwenPaw，深度融合通义千问开源生态。
+                            支持接入<strong>钉钉、飞书、微信、Discord、Telegram</strong> 等全渠道，
+                            具备<strong>多智能体协作、技能扩展、长期记忆进化、MCP 集成</strong>等能力。
+                            可配合 <strong>Qwen3.7-Plus</strong> 多模态模型实现"看、想、写、做、验"全流程自动化。
+                            <strong>完全开源（Apache 2.0），支持本地/云端部署</strong>，数据不出门。
+                        </p>
+
+                        <!-- 亮点标签 -->
+                        <div style="margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 8px;">
+                            <span style="background:#eafaf1; color:#27ae60; padding:4px 12px; border-radius:20px; font-size:13px;">💬 钉钉/飞书/微信/Telegram</span>
+                            <span style="background:#ebf5fb; color:#2980b9; padding:4px 12px; border-radius:20px; font-size:13px;">🧠 多智能体协作</span>
+                            <span style="background:#f5eef8; color:#8e44ad; padding:4px 12px; border-radius:20px; font-size:13px;">🧬 长期记忆进化</span>
+                            <span style="background:#fef9e7; color:#f39c12; padding:4px 12px; border-radius:20px; font-size:13px;">📦 MCP / Skills 扩展</span>
+                            <span style="background:#fdedec; color:#c0392b; padding:4px 12px; border-radius:20px; font-size:13px;">👁️ Qwen3.7-Plus 多模态</span>
+                            <span style="background:#fef3e9; color:#e67e22; padding:4px 12px; border-radius:20px; font-size:13px;">📜 Apache 2.0 开源</span>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #eafaf1, #d5f5e3); border-left: 4px solid #27ae60; padding: 10px 15px; border-radius: 8px; margin: 10px 0; font-size: 14px; color: #2c3e50;">
+                            <strong>🆕 最新动态：</strong>
+                            <span style="font-size: 13px;">
+                                ✅ 2026-06-02 阿里发布 <strong>Qwen3.7-Plus</strong> 多模态智能体模型（Vision Arena 全球前五·中国第一）<br>
+                                ✅ 支持 pip 安装 / Docker 部署 / 一键脚本 / 桌面应用 / 阿里云 ECS 一键部署 / 魔搭创空间<br>
+                                ✅ 新用户阿里云百炼可领 <strong>7000万免费 Tokens</strong>（有效期90天）<br>
+                                ✅ 无需自备 GPU，可对接云端大模型 API（通义千问 / Ollama / LM Studio 等）
+                            </span>
+                        </div>
+
+                        <!-- 官网入口 -->
+                        <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 10px;">
+                            <a href="https://qwenpaw.agentscope.io/" class="link" target="_blank" style="background: linear-gradient(135deg, #27ae60, #1e8449);">🌐 访问官网</a>
+                            <a href="https://qwenpaw.agentscope.io/docs/intro/?lang=zh" class="link" target="_blank" style="background: linear-gradient(135deg, #16a085, #1abc9c);">📖 中文文档</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI模型提供商 -->
+            <div class="section">
+                <div class="section-title">
+                    <span>🤖 AI模型提供商选择与获取</span>
+                </div>
+                <p style="color: #666; margin-bottom: 20px;">精选国内优质AI模型服务商，支持高效稳定的API调用：</p>
+
+                <div class="provider-list">
+                    <div class="provider-card siliconflow">
+                        <div class="provider-name"><span class="provider-icon">💎</span> 硅基流动 - SiliconFlow</div>
+
+                        <div class="feature highlight">
+                            <strong>🎁 新用户福利：注册即送16元代金券 + 2000万免费Tokens</strong>
+                        </div>
+
+                        <div class="feature">
+                            <strong>🌐 注册地址：</strong>
+                            <a href="https://cloud.siliconflow.cn/i/FUkhHCk2"
+                                target="_blank">https://cloud.siliconflow.cn/i/FUkhHCk2</a>
+                        </div>
+
+                        <div class="feature">
+                            <strong>🔗 接口地址：</strong>
+                            <code>https://api.siliconflow.cn/v1</code>
+                        </div>
+
+                        <div class="feature">
+                            <strong>🧠 推荐模型ID：</strong><br>
+                            <code>Pro/deepseek-ai/DeepSeek-V4-Pro</code>（旗舰，¥3/百万输入，¥6/百万输出，永久降价75%）<br>
+                            <code>deepseek-ai/DeepSeek-V4-Flash</code>（高速版，¥1/百万输入，¥2/百万输出）<br>
+                            <span style="font-size: 13px;">另支持 Qwen3、GLM-5、DeepSeek-R1 等数百款模型，9B以下模型永久免费</span>
+                        </div>
+
+                        <div style="margin-top: 15px; color: #666; font-size: 14px;">
+                            <strong>💡 推荐理由：</strong> 国内首选聚合平台，接入DeepSeek V4全系列，价格已对齐官方。<strong style="color:#8e44ad;">9B以下开源模型永久免费</strong>，新用户送2000万Tokens体验。可用邀请码 <strong style="background:#f5eef8; padding:2px 6px; border-radius:4px;">FUkhHCk2</strong> 注册领取16元代金券。
+                        </div>
+                    </div>
+
+                    <div class="provider-card deepseek">
+                        <div class="provider-name"><span class="provider-icon">🌊</span> DeepSeek - 官方API</div>
+
+                        <div class="feature highlight">
+                            <strong>🎁 新用户福利：注册送 ¥10 免费额度（V4 发布期内），预付费充值，¥10 起充</strong>
+                        </div>
+
+                        <div class="feature">
+                            <strong>🌐 注册地址：</strong>
+                            <a href="https://platform.deepseek.com" target="_blank">https://platform.deepseek.com</a>
+                        </div>
+
+                        <div class="feature">
+                            <strong>🔗 接口地址：</strong>
+                            <code>https://api.deepseek.com/v1</code>（兼容 OpenAI 格式）
+                        </div>
+
+                        <div class="feature">
+                            <strong>🧠 推荐模型ID：</strong><br>
+                            <code>deepseek-chat</code>（V4 系列，自动路由到最新版）<br>
+                            <code>deepseek-reasoner</code>（DeepSeek-R1 推理模型）<br>
+                            <code>deepseek-coder</code>（代码专用模型）
+                        </div>
+
+                        <div class="feature">
+                            <strong>💰 官方定价（永久降价后）：</strong><br>
+                            <strong>V4-Pro</strong>：输入 ¥3/百万Token（缓存命中 ¥0.025），输出 ¥6/百万Token<br>
+                            <strong>V4-Flash</strong>：输入 ¥1/百万Token，输出 ¥2/百万Token（缓存命中低至 ¥0.02）<br>
+                            <span style="font-size: 13px;">支持 1M 上下文窗口，最大输出 384K tokens，支付宝/微信直接充值</span>
+                        </div>
+
+                        <div style="margin-top: 15px; color: #666; font-size: 14px;">
+                            <strong>💡 推荐理由：</strong> DeepSeek 官方直连，API 定价行业最低档（V4-Pro 输出仅 ¥6/百万Token），已永久降价75%。完全兼容 OpenAI 格式，接入成本极低。<strong style="color:#e74c3c;">唯一缺点：需要预付费充值，无免费调用额度。</strong>建议首充 ¥10-20 测试，日常轻度使用一个月都花不完。
+                        </div>
+                    </div>
+
+                    <div class="provider-card deepseek">
+                        <div class="provider-name"><span class="provider-icon">🔥</span> MiniMax - 官方API</div>
+
+                        <div class="feature highlight">
+                            <strong>🎁 新用户福利：注册即送 15 元代金券（按量计费）</strong>
+                        </div>
+
+                        <div class="feature">
+                            <strong>🏆 模型特色：</strong> <strong>MiniMax-M3</strong>（2026年6月1日发布）—— 国产首个同时具备前沿编程（SWE-Bench Pro 59.0%超越GPT-5.5）、百万token超长上下文、原生多模态三项能力的开源旗舰模型。M2.7 作为高速版仍可用。
+                        </div>
+
+                        <div class="feature">
+                            <strong>🌐 注册地址：</strong>
+                            <a href="https://platform.minimaxi.com" target="_blank">https://platform.minimaxi.com</a>
+                        </div>
+
+                        <div class="feature">
+                            <strong>🔗 接口地址：</strong>
+                            <code>https://api.minimax.chat/v1</code>
+                        </div>
+
+                        <div class="feature">
+                            <strong>🧠 模型ID：</strong><br>
+                            <code>MiniMax-M3</code>（旗舰，¥4.2/百万输入，¥16.8/百万输出，≤512K上下文）<br>
+                            <code>MiniMax-M2.7</code> / <code>MiniMax-M2.7-highspeed</code>（经济高速版）
+                        </div>
+
+                        <div style="margin-top: 15px; color: #666; font-size: 14px;">
+                            <strong>💡 推荐理由：</strong> 国产编程能力前沿，已开源，支持1M上下文。新增Token Plan订阅方案：<strong style="color:#27ae60;">Plus ¥49/月（6亿Token）</strong> / <strong style="color:#2980b9;">Max ¥119/月（18亿Token）</strong> / <strong style="color:#8e44ad;">Ultra ¥469/月（55亿Token）</strong>。腾讯云TokenHub 已下调M3价格50%。API定价较高，适合代码和智能体场景。
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 安全测试提示词 -->
+            <div class="section">
+                <div class="section-title">
+                    <span>🔒 安全测试提示词</span>
+                </div>
+
+                <div class="security-section">
+                    <div class="security-title">部署后必做：五步安全检查（小白也能看懂）</div>
+                    <p>下面的提示词帮你把AI助手<strong>里里外外检查一遍</strong>，看看有没有安全隐患。直接复制发给你的AI助手就行，它出的报告会用<strong>大白话</strong>告诉你哪里有问题、该怎么解决。</p>
+
+                    <div class="prompt-box">
+<strong>① 给AI助手做个全面体检</strong><br><br>
+请帮我全面检查一下我这台电脑上的AI助手，看看它的安全保护做得好不好。具体看看这些方面：<br><br>
+- 有没有容易被别人远程控制的漏洞？<br>
+- 电脑上有哪些文件和文件夹是AI助手能看到的？这些权限设置对不对？<br>
+- 有没有开着不该开的网络通道，让别人能偷偷连进来？<br>
+- 整体安全保护够不够牢固？<br><br>
+检查完后，请用大白话给我一份报告，告诉我：<br>
+✅ 目前安全方面做得好的地方<br>
+❌ 有风险的地方（说清楚风险有多大：大问题/中等问题/小问题）<br>
+🔧 每个问题怎么解决（最好是普通人能操作的方法）
+                    </div>
+
+                    <div class="prompt-box">
+<strong>② 检查设置文件有没有"泄漏隐私"</strong><br><br>
+请检查我的AI助手的设置文件（比如配置文件、环境变量等），看看有没有不小心把不该公开的东西暴露出去。帮我重点看看：<br><br>
+- AI的API密钥（就像账号密码）有没有直接写在文件里，别人看到就能用？<br>
+- 有没有开着"调试模式"没关——相当于给小偷留了后门？<br>
+- 哪些人可以访问AI助手的网页管理页面，设置有没有太随意？<br>
+- 日志文件里有没有不小心记下了我的聊天内容、密码、手机号之类的隐私？<br><br>
+请用大白话给我报告，每个问题都标注风险有多大（🔴危险/🟡注意/🟢安全），并告诉我普通人该怎么修。
+                    </div>
+
+                    <div class="prompt-box">
+<strong>③ 模拟黑客攻击测试</strong><br><br>
+请你模拟一个黑客，试试看能不能攻破我这台AI助手的网页管理端。测试以下常见的攻击方式：<br><br>
+- 能不能通过输入特殊字符搞崩系统？<br>
+- 能不能在输入框里插入恶意代码？<br>
+- 能不能伪造请求冒充管理员操作？<br>
+- 能不能通过修改网页地址看到不该看的文件？<br>
+- 有没有没设密码就能直接调用的敏感功能？<br><br>
+发现漏洞后，请用大白话说清楚：<br>
+🔴 漏洞有多严重（很容易被黑 / 有点难 / 基本安全）<br>
+🔧 普通人怎么修复，一步一步教我
+                    </div>
+
+                    <div class="prompt-box">
+<strong>④ 查查我的隐私数据安不安全</strong><br><br>
+请检查我的AI助手对隐私数据的保护情况，帮我查清楚：<br><br>
+- 我和AI的聊天记录存在电脑的哪里？有没有加密保护？<br>
+- AI能访问我电脑上哪些文件？会不会不小心把我的重要文件发给别人？<br>
+- 日志文件里有没有记下我的手机号、密码、API密钥这些敏感信息？<br>
+- 我给AI发消息、AI调用模型时，这些数据在传输过程中有没有加密？<br>
+- AI用的本地数据库文件，其他人能不能随便打开看？<br><br>
+请用大白话出报告，告诉我：<br>
+✅ 哪些做得不错可以放心<br>
+❌ 哪些有隐私泄漏风险（严重程度分级）<br>
+🔧 每个问题怎么加固，用最简单的话说
+                    </div>
+
+                    <div class="prompt-box">
+<strong>⑤ 最后再做个总体评估，心里有底</strong><br><br>
+做了上面四步检查后，请帮我做个总体评估：<br><br>
+- AI助手的主要程序文件有没有被人动过手脚？（检查文件有没有被篡改）<br>
+- 我装的所有插件和技能分别来自哪里？它们需要我电脑上的哪些权限？<br>
+- AI助手的自动更新功能安全吗？会不会偷偷下载有问题的更新？<br><br>
+最后，给我一个总体安全评分，满分100分，并告诉我：<br>
+📊 总分多少分<br>
+⚡ 最需要马上处理的3个问题是什么<br>
+📋 按紧急程度排个序，先从哪个开始修
+                    </div>
+
+                    <p style="margin-top: 15px; color: rgba(255,255,255,0.8);">
+                        <strong>💡 怎么用这些提示词：</strong><br>
+                        按①→②→③→④→⑤的顺序，每次复制一段发给你的AI助手，等它出完报告再做下一步。<br>
+                        如果AI助手说某项检查做不了（比如没读取系统文件的权限），你可以选"跳过"，继续下一项。<br>
+                        遇到看不懂的报告内容，直接让它"用更简单的话说一遍"就行。<br>
+                        全部做完后，把五个报告里的🔴 红标问题优先处理掉，基本就稳了。
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer">
+            <p>© 2026 安全养虾指南</p>
+            <p style="margin-top: 8px; font-size: 12px; color: #888;">
+                数据更新至 2026-06-25 | 价格、免费额度及优惠政策以各服务商官网最新公告为准
+            </p>
+            <p style="margin-top: 8px; font-size: 12px; color: #999;">
+                <strong>📝 信息说明：</strong>本文所有产品信息、定价、免费额度等均来源于各产品官网公开信息及官方公告。
+                文中包含的邀请链接仅用于方便读者注册，不构成任何推广或商业合作。<br>
+                部分模型/服务的定价可能随时调整，建议使用前访问官网核实最新信息。
+                如有疏漏或更新，欢迎反馈。
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // 添加卡片悬停效果增强
+        document.querySelectorAll('.software-card, .provider-card').forEach(card => {
+            card.addEventListener('mouseenter', function () {
+                this.style.transition = 'all 0.3s ease';
+            });
+        });
+
+        // 为所有外部链接添加新窗口打开提示
+        document.querySelectorAll('a[href^="http"]').forEach(link => {
+            link.setAttribute('target', '_blank');
+            link.setAttribute('rel', 'noopener noreferrer');
+        });
+
+        // 添加点击效果
+        document.querySelectorAll('.link').forEach(link => {
+            link.addEventListener('click', function (e) {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // 添加滚动动画效果
+        window.addEventListener('scroll', function () {
+            const cards = document.querySelectorAll('.software-card, .provider-card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // 初始化卡片透明度
+        document.querySelectorAll('.software-card, .provider-card').forEach(card => {
+            card.style.opacity = '0.9';
+            card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        });
+
+        // 浏览器兼容性提示（可选）
+        if (navigator.userAgent.indexOf('MSIE') !== -1 ||
+            navigator.userAgent.match(/Trident.*rv:11\./)) {
+            console.log('建议使用现代浏览器（如Chrome、Edge、Firefox）获得最佳体验');
+        }
+    </script>
+</body>
+
+</html>
