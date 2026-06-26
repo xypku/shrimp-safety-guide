@@ -15,8 +15,8 @@
 
         body {
             font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
-            background: linear-gradient(135deg, #1a2980, #26d0ce);
-            color: #333;
+            background: linear-gradient(135deg, #dbeafe, #e0f2fe, #ecfdf5);
+            color: #1e293b;
             line-height: 1.6;
             min-height: 100vh;
             padding: clamp(8px, 2vw, 20px);
@@ -27,16 +27,16 @@
             max-width: 860px;
             width: 100%;
             margin: 0 auto;
-            background: white;
+            background: #ffffff;
             border-radius: clamp(12px, 2.5vw, 20px);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.18);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.03);
             overflow: hidden;
             position: relative;
         }
 
         /* ===== 页头 ===== */
         .header {
-            background: linear-gradient(135deg, #2c3e50, #3498db);
+            background: linear-gradient(135deg, #2563eb, #06b6d4);
             color: white;
             padding: clamp(24px, 5vw, 40px) clamp(16px, 4vw, 30px);
             text-align: center;
@@ -86,29 +86,30 @@
         .section {
             margin-bottom: clamp(24px, 5vw, 40px);
             padding: clamp(16px, 3vw, 25px);
-            background: #f8fafc;
+            background: #ffffff;
             border-radius: 15px;
-            border-left: 5px solid #3498db;
+            border-left: 5px solid #3b82f6;
+            box-shadow: 0 2px 12px rgba(59, 130, 246, 0.08);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .section:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.1);
+            box-shadow: 0 8px 28px rgba(59, 130, 246, 0.12);
         }
 
         .section-title {
             font-size: clamp(18px, 3.5vw, 22px);
-            color: #2c3e50;
+            color: #1e293b;
             margin-bottom: clamp(12px, 2.5vw, 20px);
-            font-weight: 600;
+            font-weight: 700;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
         .section>p {
-            color: #666;
+            color: #475569;
             margin-bottom: 16px;
         }
 
@@ -135,19 +136,19 @@
 
         .software-card p,
         .provider-card p {
-            color: #666;
+            color: #475569;
             font-size: clamp(14px, 2.2vw, 15px);
-            line-height: 1.7;
+            line-height: 1.8;
             margin-bottom: 12px;
         }
 
         /* ===== 卡片标题 ===== */
         .software-name,
         .provider-name {
-            font-size: clamp(16px, 3vw, 20px);
-            color: #2c3e50;
+            font-size: clamp(17px, 3vw, 20px);
+            color: #0f172a;
             margin-bottom: clamp(8px, 1.5vw, 12px);
-            font-weight: 600;
+            font-weight: 700;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -158,16 +159,16 @@
         .software-name.tencent { color: #0084ff; }
 
         .software-card {
-            border: 2px solid #e3f2fd;
+            border: 2px solid #e2e8f0;
         }
         .software-card:hover {
-            border-color: #3498db;
+            border-color: #3b82f6;
             transform: translateY(-2px);
-            box-shadow: 0 10px 22px rgba(52, 152, 219, 0.12);
+            box-shadow: 0 12px 24px rgba(59, 130, 246, 0.12);
         }
 
         .software-card[style*="border-color: #d5f5e3"] {
-            border-color: #d5f5e3;
+            border-color: #a7f3d0;
         }
 
         /* ===== 标签行 ===== */
@@ -290,12 +291,12 @@
 
         .software-icon,
         .provider-icon {
-            font-size: clamp(20px, 3.5vw, 26px);
+            font-size: clamp(22px, 3.5vw, 28px);
         }
 
         /* ===== 安全测试区 ===== */
         .security-section {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            background: linear-gradient(135deg, #ef4444, #f97316);
             color: white;
             padding: clamp(16px, 3vw, 25px);
             border-radius: 12px;
@@ -330,10 +331,10 @@
         .footer {
             text-align: center;
             padding: clamp(16px, 3vw, 30px);
-            color: #666;
+            color: #64748b;
             font-size: clamp(12px, 2vw, 14px);
-            background: #f8fafc;
-            border-top: 1px solid #eaeaea;
+            background: #ffffff;
+            border-top: 1px solid #e2e8f0;
         }
 
         .footer p {
@@ -542,56 +543,62 @@
         /* ---- 深色模式兼容 ---- */
         @media (prefers-color-scheme: dark) {
             body {
-                background: linear-gradient(135deg, #0f1b4d, #1a7a78);
+                background: linear-gradient(135deg, #1e293b, #0f172a);
             }
 
             .container {
-                background: #1a1a2e;
+                background: #1e293b;
+                box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
             }
 
             .section {
-                background: #16213e;
+                background: #334155;
+                border-left-color: #60a5fa;
             }
 
             .section-title {
-                color: #e0e0e0;
+                color: #f1f5f9;
             }
 
             .software-card,
             .provider-card {
-                background: #1e2738;
-                border-color: #2a3a5e !important;
+                background: #1e293b;
+                border-color: #475569 !important;
                 box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
             }
 
             .software-card p,
             .provider-card p,
             .section>p {
-                color: #b0b8c8;
+                color: #cbd5e1;
+            }
+
+            .software-card:hover {
+                border-color: #60a5fa !important;
             }
 
             .software-name,
             .provider-name {
-                color: #e0e0e0;
+                color: #f1f5f9;
             }
 
             .feature {
-                background: #2a3a5e;
-                color: #c8d0e0;
+                background: #475569;
+                color: #e2e8f0;
             }
 
             .feature-box {
-                color: #d0d8e8;
+                color: #e2e8f0;
             }
 
             .footer {
-                background: #16213e;
-                border-top-color: #2a3a5e;
-                color: #8890a0;
+                background: #334155;
+                border-top-color: #475569;
+                color: #94a3b8;
             }
 
             .link {
-                box-shadow: 0 4px 15px rgba(52, 152, 219, 0.15);
+                box-shadow: 0 4px 15px rgba(96, 165, 250, 0.15);
             }
         }
     </style>
