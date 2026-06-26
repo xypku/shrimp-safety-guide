@@ -6,147 +6,173 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>安全养虾指南 | AI助手部署全攻略</title>
     <style>
-        /* ===== 基础重置 ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* ============================================
+           社区科普插画信息图风 (Community AI Education)
+           配色：暖米白基底 + 翡翠绿点缀 + 珊瑚橙高亮
+           气质：社区科普展板 / 政府宣传栏 / 社工手册
+           ============================================ */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
-            background: linear-gradient(135deg, #dbeafe, #e0f2fe, #ecfdf5);
+            font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Helvetica Neue", sans-serif;
+            background: #fefce8;
             color: #1e293b;
-            line-height: 1.6;
+            line-height: 1.7;
             min-height: 100vh;
-            padding: clamp(8px, 2vw, 20px);
+            padding: clamp(6px, 1.5vw, 16px);
         }
 
-        /* ===== 容器 ===== */
         .container {
-            max-width: 860px;
+            max-width: 880px;
             width: 100%;
             margin: 0 auto;
-            background: #ffffff;
-            border-radius: clamp(12px, 2.5vw, 20px);
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.03);
+            background: #fffdf7;
+            border-radius: 24px;
+            box-shadow: 0 2px 20px rgba(5, 150, 105, 0.06), 0 1px 4px rgba(0,0,0,0.03);
             overflow: hidden;
             position: relative;
         }
 
-        /* ===== 页头 ===== */
+        /* ===== 页头 - 社区讲座黑板报风格 ===== */
         .header {
-            background: linear-gradient(135deg, #2563eb, #06b6d4);
+            background: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
             color: white;
-            padding: clamp(24px, 5vw, 40px) clamp(16px, 4vw, 30px);
+            padding: clamp(28px, 5vw, 44px) clamp(16px, 4vw, 30px);
             text-align: center;
             position: relative;
             overflow: hidden;
         }
 
-        .header::before {
+        .header::after {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: float 20s linear infinite;
+            bottom: 0; left: 0; right: 0;
+            height: 8px;
+            background: repeating-linear-gradient(
+                90deg,
+                #fbbf24 0px, #fbbf24 20px,
+                transparent 20px, transparent 40px
+            );
+        }
+
+        .header::before {
+            content: '🦐';
+            position: absolute;
+            left: clamp(8px, 3vw, 24px);
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: clamp(48px, 10vw, 80px);
             opacity: 0.2;
         }
 
-        @keyframes float {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            100% { transform: translate(-50px, -50px) rotate(360deg); }
-        }
-
         .header h1 {
-            font-size: clamp(22px, 4.5vw, 32px);
-            font-weight: 700;
-            margin-bottom: clamp(8px, 1.5vw, 15px);
+            font-size: clamp(26px, 5vw, 36px);
+            font-weight: 800;
+            margin-bottom: 6px;
             position: relative;
             z-index: 2;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .header .subtitle {
-            font-size: clamp(13px, 2.5vw, 16px);
-            opacity: 0.9;
+            font-size: clamp(14px, 2.5vw, 18px);
+            opacity: 0.92;
             position: relative;
             z-index: 2;
+            font-weight: 500;
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            padding: 4px 18px;
+            border-radius: 20px;
+            margin-top: 6px;
         }
 
         /* ===== 正文区域 ===== */
         .content {
-            padding: clamp(16px, 4vw, 40px);
+            padding: clamp(20px, 4vw, 44px);
         }
 
-        /* ===== 通用版块 ===== */
+        /* ===== 通用版块 - 展板分区感 ===== */
         .section {
-            margin-bottom: clamp(24px, 5vw, 40px);
-            padding: clamp(16px, 3vw, 25px);
+            margin-bottom: clamp(20px, 3.5vw, 32px);
+            padding: clamp(18px, 3vw, 28px);
             background: #ffffff;
-            border-radius: 15px;
-            border-left: 5px solid #3b82f6;
-            box-shadow: 0 2px 12px rgba(59, 130, 246, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 18px;
+            border: 2px solid #e0e7ff;
+            box-shadow: 0 3px 12px rgba(5, 150, 105, 0.06);
+            position: relative;
+            transition: box-shadow 0.3s ease;
         }
-
         .section:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 28px rgba(59, 130, 246, 0.12);
+            box-shadow: 0 6px 20px rgba(5, 150, 105, 0.1);
         }
 
+        /* 版块标题 - 信息图表标签栏 */
         .section-title {
-            font-size: clamp(18px, 3.5vw, 22px);
-            color: #1e293b;
+            font-size: clamp(19px, 3.5vw, 24px);
+            color: #065f46;
             margin-bottom: clamp(12px, 2.5vw, 20px);
-            font-weight: 700;
+            font-weight: 800;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            letter-spacing: 0.5px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #059669, #34d399);
+            border-radius: 2px;
         }
 
         .section>p {
             color: #475569;
             margin-bottom: 16px;
+            font-size: clamp(14px, 2.2vw, 16px);
         }
 
-        /* ===== 卡片通用 ===== */
+        /* ===== 卡片区 - 科普信息卡片 ===== */
         .software-list,
-        .provider-list {
-            margin-top: 16px;
-        }
+        .provider-list { margin-top: 14px; }
 
         .software-card,
         .provider-card {
-            background: white;
-            border-radius: 12px;
-            padding: clamp(16px, 3vw, 25px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+            background: #ffffff;
+            border-radius: 16px;
+            padding: clamp(18px, 3vw, 26px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            border: 2px solid #f0f9f4;
             transition: all 0.3s ease;
-            margin-bottom: clamp(12px, 2.5vw, 20px);
+            margin-bottom: clamp(14px, 2.5vw, 22px);
+            position: relative;
         }
-
         .software-card:last-child,
-        .provider-card:last-child {
-            margin-bottom: 0;
-        }
+        .provider-card:last-child { margin-bottom: 0; }
 
         .software-card p,
         .provider-card p {
             color: #475569;
-            font-size: clamp(14px, 2.2vw, 15px);
-            line-height: 1.8;
+            font-size: clamp(14px, 2.2vw, 15.5px);
+            line-height: 1.85;
             margin-bottom: 12px;
+        }
+
+        .software-card:hover {
+            border-color: #a7f3d0;
+            box-shadow: 0 6px 18px rgba(5, 150, 105, 0.08);
         }
 
         /* ===== 卡片标题 ===== */
         .software-name,
         .provider-name {
-            font-size: clamp(17px, 3vw, 20px);
-            color: #0f172a;
+            font-size: clamp(18px, 3vw, 21px);
+            color: #065f46;
             margin-bottom: clamp(8px, 1.5vw, 12px);
             font-weight: 700;
             display: flex;
@@ -155,122 +181,91 @@
             flex-wrap: wrap;
         }
 
-        .software-name.zhizhi { color: #e74c3c; }
-        .software-name.tencent { color: #0084ff; }
-
-        .software-card {
-            border: 2px solid #e2e8f0;
-        }
-        .software-card:hover {
-            border-color: #3b82f6;
-            transform: translateY(-2px);
-            box-shadow: 0 12px 24px rgba(59, 130, 246, 0.12);
-        }
-
         .software-card[style*="border-color: #d5f5e3"] {
             border-color: #a7f3d0;
         }
 
-        /* ===== 标签行 ===== */
+        /* ===== 标签行 - 科普说明标签 ===== */
         .tag-row {
             display: flex;
             flex-wrap: wrap;
             gap: 6px;
             margin-bottom: 12px;
         }
-
-        .tag {
-            display: inline-flex;
-            align-items: center;
-            background: linear-gradient(135deg, #27ae60, #2ecc71);
-            color: white;
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-size: clamp(11px, 2vw, 13px);
-            font-weight: 600;
-            white-space: nowrap;
-        }
-
         .tag-outline {
             display: inline-flex;
             align-items: center;
             gap: 4px;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: clamp(11px, 2vw, 13px);
+            padding: 3px 10px;
+            border-radius: 16px;
+            font-size: clamp(11px, 1.8vw, 12.5px);
             white-space: nowrap;
+            font-weight: 500;
         }
 
-        /* ===== 特色/福利框 ===== */
+        /* ===== 福利/特色框 - 讲座通知条 ===== */
         .feature-box {
-            padding: clamp(10px, 2vw, 14px);
-            border-radius: 8px;
-            margin: 10px 0;
-            font-size: clamp(13px, 2vw, 14px);
-            color: #2c3e50;
-            border-left: 4px solid;
-        }
-
-        .feature-box strong,
-        .feature {
-            font-size: clamp(13px, 2vw, 14px);
+            padding: clamp(12px, 2vw, 16px);
+            border-radius: 12px;
+            margin: 12px 0;
+            font-size: clamp(13px, 2vw, 14.5px);
+            color: #065f46;
+            border-left: 5px solid;
+            background: #f0fdf4;
         }
 
         .feature {
-            background: #e3f2fd;
-            padding: clamp(8px, 1.5vw, 12px);
-            border-radius: 8px;
+            background: #f0fdf4;
+            border: 1px solid #d1fae5;
+            padding: clamp(8px, 1.5vw, 12px) clamp(10px, 2vw, 14px);
+            border-radius: 10px;
             margin: 8px 0;
             font-size: clamp(13px, 2vw, 14px);
-            color: #2c3e50;
+            color: #065f46;
             word-break: break-word;
             overflow-wrap: break-word;
         }
-
         .feature code {
             display: inline-block;
-            font-size: clamp(12px, 1.8vw, 13px);
+            font-size: clamp(11px, 1.6vw, 12.5px);
             word-break: break-all;
-            background: rgba(0,0,0,0.04);
-            padding: 1px 6px;
+            background: #d1fae5;
+            padding: 1px 8px;
             border-radius: 4px;
+            color: #065f46;
         }
-
         .feature.highlight {
-            background: linear-gradient(135deg, #ffd6e7, #c2e9fb);
-            border-left: 4px solid #e74c3c;
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 5px solid #f59e0b;
+            border-color: #fbbf24;
         }
 
-        /* ===== 按钮 ===== */
+        /* ===== 按钮 - 温馨指引条 ===== */
         .link {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #3498db, #2980b9);
+            background: #059669;
             color: white;
-            padding: clamp(10px, 2vw, 14px) clamp(16px, 3vw, 24px);
-            border-radius: 25px;
+            padding: clamp(10px, 2vw, 14px) clamp(18px, 3vw, 28px);
+            border-radius: 30px;
             text-decoration: none;
-            font-size: clamp(13px, 2vw, 14px);
-            font-weight: 500;
+            font-size: clamp(14px, 2.2vw, 15px);
+            font-weight: 600;
             margin-top: 10px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            box-shadow: 0 3px 10px rgba(5, 150, 105, 0.2);
             min-height: 44px;
             touch-action: manipulation;
+            letter-spacing: 0.3px;
         }
-
         .link:hover {
+            background: #047857;
+            box-shadow: 0 5px 16px rgba(5, 150, 105, 0.3);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
-            background: linear-gradient(135deg, #2980b9, #1f618d);
         }
+        .link:active { transform: scale(0.96); }
 
-        .link:active {
-            transform: scale(0.96);
-        }
-
-        /* ===== 按钮组 ===== */
         .btn-group {
             display: flex;
             flex-wrap: wrap;
@@ -278,112 +273,78 @@
             margin-top: 10px;
         }
 
-        /* ===== 卡片特殊样式 ===== */
+        /* ===== 提供商卡片 ===== */
         .provider-card {
             position: relative;
             overflow: hidden;
             border-left: 5px solid;
         }
-
-        .provider-card.siliconflow { border-left-color: #9b59b6; }
-        .provider-card.chatanywhere { border-left-color: #e67e22; }
-        .provider-card.deepseek { border-left-color: #1abc9c; }
+        .provider-card.siliconflow { border-left-color: #8b5cf6; }
+        .provider-card.deepseek { border-left-color: #14b8a6; }
 
         .software-icon,
         .provider-icon {
-            font-size: clamp(22px, 3.5vw, 28px);
+            font-size: clamp(24px, 3.5vw, 30px);
         }
 
-        /* ===== 安全测试区 ===== */
+        /* ===== 安全测试区 - 宣传栏重点提醒 ===== */
         .security-section {
-            background: linear-gradient(135deg, #ef4444, #f97316);
+            background: linear-gradient(135deg, #dc2626, #f97316);
             color: white;
-            padding: clamp(16px, 3vw, 25px);
-            border-radius: 12px;
+            padding: clamp(18px, 3vw, 28px);
+            border-radius: 18px;
             margin-top: 16px;
+            position: relative;
         }
-
+        .security-section::after {
+            content: '⚠️';
+            position: absolute;
+            right: clamp(8px, 3vw, 20px);
+            bottom: clamp(8px, 2vw, 16px);
+            font-size: clamp(32px, 6vw, 48px);
+            opacity: 0.15;
+        }
         .security-title {
-            font-size: clamp(17px, 3vw, 20px);
+            font-size: clamp(18px, 3vw, 22px);
             margin-bottom: 12px;
+            font-weight: 700;
         }
-
         .prompt-box {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,0.12);
             padding: clamp(12px, 2.5vw, 20px);
-            border-radius: 10px;
-            font-family: "PingFang SC", "Microsoft YaHei", "Courier New", monospace;
-            font-size: clamp(13px, 2vw, 14px);
+            border-radius: 12px;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            font-size: clamp(13px, 2vw, 14.5px);
             margin-top: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            line-height: 1.7;
+            border: 2px dashed rgba(255,255,255,0.25);
+            line-height: 1.75;
             white-space: pre-wrap;
             word-break: break-word;
         }
-
         .security-section>p {
-            margin-top: 15px;
-            color: rgba(255,255,255,0.85);
-            font-size: clamp(13px, 2vw, 14px);
+            margin-top: 16px;
+            color: rgba(255,255,255,0.88);
+            font-size: clamp(13px, 2vw, 14.5px);
         }
 
-        /* ===== 页脚 ===== */
+        /* ===== 页脚 - 社区公告栏 ===== */
         .footer {
             text-align: center;
-            padding: clamp(16px, 3vw, 30px);
-            color: #64748b;
+            padding: clamp(20px, 3vw, 32px) clamp(16px, 4vw, 30px);
+            color: #6b7280;
             font-size: clamp(12px, 2vw, 14px);
-            background: #ffffff;
-            border-top: 1px solid #e2e8f0;
+            background: #fefce8;
+            border-top: 2px solid #d1fae5;
         }
-
-        .footer p {
-            margin-top: 6px;
-        }
-        .footer p:first-child {
-            margin-top: 0;
-        }
-
-        /* ===== 安装命令框 ===== */
-        .install-box {
-            background: #1e2a3a;
-            color: #a8d8a8;
-            padding: 12px 16px;
-            border-radius: 10px;
-            font-family: 'Courier New', monospace;
-            font-size: clamp(12px, 1.8vw, 13px);
-            margin: 8px 0;
-            border-left: 4px solid #27ae60;
-            line-height: 1.8;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .install-box .comment { color: #7f8c8d; }
-
-        /* ===== 价格对比框 ===== */
-        .price-comparison {
-            background: linear-gradient(135deg, #4a69bd, #6a89cc);
-            color: white;
-            padding: clamp(14px, 2.5vw, 20px);
-            border-radius: 12px;
-            margin-top: 16px;
-        }
-
-        .price-comparison a {
-            color: white;
-            font-weight: 500;
-        }
+        .footer p { margin-top: 6px; }
+        .footer p:first-child { margin-top: 0; }
 
         /* ===== 行内代码 ===== */
         code {
             font-size: clamp(12px, 1.8vw, 13px);
             word-break: break-all;
         }
-
-        a {
-            word-break: break-all;
-        }
+        a { word-break: break-all; }
 
         /* ================================================
                    响应式断点
@@ -540,66 +501,85 @@
             }
         }
 
-        /* ---- 深色模式兼容 ---- */
+        /* ---- 深色模式 - 暖棕夜灯模式 ---- */
         @media (prefers-color-scheme: dark) {
             body {
-                background: linear-gradient(135deg, #1e293b, #0f172a);
+                background: #1c1917;
             }
 
             .container {
-                background: #1e293b;
-                box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+                background: #292524;
+                box-shadow: 0 2px 20px rgba(0,0,0,0.4);
             }
 
             .section {
-                background: #334155;
-                border-left-color: #60a5fa;
+                background: #44403c;
+                border-color: #57534e;
             }
 
             .section-title {
-                color: #f1f5f9;
+                color: #f5f5f4;
+            }
+            .section-title::after {
+                background: linear-gradient(90deg, #34d399, #6ee7b7);
             }
 
             .software-card,
             .provider-card {
-                background: #1e293b;
-                border-color: #475569 !important;
-                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+                background: #292524;
+                border-color: #57534e !important;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.3);
             }
 
             .software-card p,
             .provider-card p,
             .section>p {
-                color: #cbd5e1;
+                color: #d6d3d1;
             }
 
             .software-card:hover {
-                border-color: #60a5fa !important;
+                border-color: #6ee7b7 !important;
             }
 
             .software-name,
             .provider-name {
-                color: #f1f5f9;
+                color: #ecfdf5;
             }
 
             .feature {
-                background: #475569;
-                color: #e2e8f0;
+                background: #57534e;
+                border-color: #78716c;
+                color: #e7e5e4;
+            }
+            .feature code {
+                background: #78716c;
+                color: #f5f5f4;
+            }
+            .feature.highlight {
+                background: linear-gradient(135deg, #78350f, #92400e);
+                border-color: #f59e0b;
             }
 
             .feature-box {
-                color: #e2e8f0;
+                background: #57534e !important;
+                color: #e7e5e4;
             }
 
             .footer {
-                background: #334155;
-                border-top-color: #475569;
-                color: #94a3b8;
+                background: #44403c;
+                border-top-color: #57534e;
+                color: #a8a29e;
             }
 
             .link {
-                box-shadow: 0 4px 15px rgba(96, 165, 250, 0.15);
+                background: #059669;
+                box-shadow: 0 3px 10px rgba(5, 150, 105, 0.15);
             }
+            .link:hover {
+                background: #047857;
+            }
+
+            .security-section::after { opacity: 0.08; }
         }
     </style>
 </head>
